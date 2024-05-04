@@ -13,26 +13,81 @@ class HelpScreen extends StatefulWidget {
 
 class _HelpScreenState extends State<HelpScreen> {
   WebViewController controller = WebViewController()
-    ..setJavaScriptMode(JavaScriptMode.unrestricted)
-    //..loadHtmlString('<h1>Hello World!<h1>');
-    ..loadHtmlString(
-      '<iframe src="https://ignasidejose.grafana.net/d-solo/bdkpa3eaqkj5sb/batet-dashboard?orgId=1&from=1714824640785&to=1714846240786&panelId=1" width="1450" height="900" frameborder="0"></iframe>');
+    ..setJavaScriptMode(JavaScriptMode.unrestricted);
+  //..loadHtmlString('<h1>Hello World!<h1>');
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    double graphWidth = screenWidth * 2.45;
+    double graphHeight = screenHeight * 1.08;
+
+    controller.loadHtmlString(
+        '<iframe src="https://ignasidejose.grafana.net/d-solo/bdkpa3eaqkj5sb/batet-dashboard?orgId=1&from=1714838660207&to=1714860260208&theme=light&panelId=1" width="$graphWidth" height="$graphHeight" frameborder="0"></iframe>');
     return Scaffold(
-      appBar: AppBar(title: const Text('Flutter Simple Example')),
-      body: WebViewWidget(controller: controller), /*Column(
+        body: Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.white,
+            Colors.white,
+            Colors.grey.shade400,
+          ],
+          stops: [0.5, 0.5, 1.0],
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text('id: ${widget.id}'),
-          SizedBox(
-            height: 300,
-            width: 300,
-            child: WebViewWidget(controller: controller),
+          Center(
+            child: SizedBox(
+                width: screenWidth * 0.9,
+                height: screenHeight * 0.4,
+                child: WebViewWidget(controller: controller)),
           ),
-          // Add widgets below the WebView
+          Row(
+            children: [
+              const SizedBox(height: 4),
+              const Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      softWrap: true,
+                      'Do Something',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      'Explanation of what doing something actually does, like it may actually be kinda long so let me just write a bit to test it',
+                      style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.normal),
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+              FloatingActionButton(
+                  onPressed: _onPressed1, child: Icon(Icons.add)),
+              SizedBox(height: 4),
+            ],
+          ),
         ],
-      ),*/
-    );
+      ),
+    ));
+  }
+
+  String _onPressed1() {
+    print('Button 1 pressed');
+    return 'a';
   }
 }

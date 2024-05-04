@@ -26,98 +26,87 @@ class TiledMenu extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Colors.purple,
-              Colors.blue,
-            ],
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: <Widget>[
+          Positioned(
+            top: screenHeight * 0.075,
+            left: screenWidth * 0.35,
+            child: MenuButton(
+              id: 1,
+              image: 'assets/icon1.jpg',
+              width: screenWidth * 0.3,
+              height: screenHeight * 0.3,
+              text: 'Heat',
+            ),
           ),
-        ),
-        child: Stack(
-          children: <Widget>[
-            Positioned(
-              top: screenHeight * 0.075,
-              left: screenWidth * 0.35,
-              child: MenuButton(
-                id: 1,
-                image: 'assets/icon1.jpg',
-                width: screenWidth * 0.3,
-                height: screenHeight * 0.3,
-                text: 'Heat',
-              ),
+          Positioned(
+            top: screenHeight * 0.175,
+            left: screenWidth * 0.025,
+            child: MenuButton(
+              id: 2,
+              image: 'assets/icon2.jpg',
+              width: screenWidth * 0.3,
+              height: screenHeight * 0.3,
+              text: 'Humidity',
             ),
-            Positioned(
-              top: screenHeight * 0.175,
-              left: screenWidth * 0.025,
-              child: MenuButton(
-                id: 2,
-                image: 'assets/icon2.jpg',
-                width: screenWidth * 0.3,
-                height: screenHeight * 0.3,
-                text: 'Humidity',
-              ),
+          ),
+          Positioned(
+            top: screenHeight * 0.40,
+            left: screenWidth * 0.35,
+            child: MenuButton(
+              id: 3,
+              image: 'assets/icon3.jpg',
+              width: screenWidth * 0.625,
+              height: screenHeight * 0.175,
+              text: 'Noise',
             ),
-            Positioned(
-              top: screenHeight * 0.40,
-              left: screenWidth * 0.35,
-              child: MenuButton(
-                id: 3,
-                image: 'assets/icon3.jpg',
-                width: screenWidth * 0.625,
-                height: screenHeight * 0.175,
-                text: 'Noise',
-              ),
+          ),
+          Positioned(
+            top: screenHeight * 0.175,
+            left: screenWidth * 0.675,
+            child: MenuButton(
+              id: 4,
+              image: 'assets/icon4.jpg',
+              width: screenWidth * 0.3,
+              height: screenHeight * 0.2,
+              text: 'Placeholder',
             ),
-            Positioned(
-              top: screenHeight * 0.175,
-              left: screenWidth * 0.675,
-              child: MenuButton(
-                id: 4,
-                image: 'assets/icon4.jpg',
-                width: screenWidth * 0.3,
-                height: screenHeight * 0.2,
-                text: 'Placeholder',
-              ),
+          ),
+          Positioned(
+            top: screenHeight * 0.50,
+            left: screenWidth * 0.025,
+            child: MenuButton(
+              id: 5,
+              image: 'assets/icon5.jpg',
+              width: screenWidth * 0.3,
+              height: screenHeight * 0.3,
+              text: 'Placeholder',
             ),
-            Positioned(
-              top: screenHeight * 0.50,
-              left: screenWidth * 0.025,
-              child: MenuButton(
-                id: 5,
-                image: 'assets/icon5.jpg',
-                width: screenWidth * 0.3,
-                height: screenHeight * 0.3,
-                text: 'Placeholder',
-              ),
+          ),
+          Positioned(
+            top: screenHeight * 0.60,
+            left: screenWidth * 0.35,
+            child: MenuButton(
+              id: 6,
+              image: 'assets/icon6.jpg',
+              width: screenWidth * 0.3,
+              height: screenHeight * 0.3,
+              text: 'Placeholder',
             ),
-            Positioned(
-              top: screenHeight * 0.60,
-              left: screenWidth * 0.35,
-              child: MenuButton(
-                id: 6,
-                image: 'assets/icon6.jpg',
-                width: screenWidth * 0.3,
-                height: screenHeight * 0.3,
-                text: 'Placeholder',
-              ),
+          ),
+          Positioned(
+            top: screenHeight * 0.60,
+            left: screenWidth * 0.675,
+            child: MenuButton(
+              id: 7,
+              image: 'assets/icon7.jpg',
+              width: screenWidth * 0.3,
+              height: screenHeight * 0.2,
+              text: 'Placeholder',
             ),
-            Positioned(
-              top: screenHeight * 0.60,
-              left: screenWidth * 0.675,
-              child: MenuButton(
-                id: 7,
-                image: 'assets/icon7.jpg',
-                width: screenWidth * 0.3,
-                height: screenHeight * 0.2,
-                text: 'Placeholder',
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -159,7 +148,7 @@ class MenuButton extends StatelessWidget {
                 width: width,
                 height: height,
                 child: Image.asset(
-                  color: Color.fromARGB(230, 255, 255, 255),
+                  color: const Color.fromARGB(230, 255, 255, 255),
                   colorBlendMode: BlendMode.modulate,
                   image,
                   fit: BoxFit.cover,

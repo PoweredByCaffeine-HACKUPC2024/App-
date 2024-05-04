@@ -32,8 +32,8 @@ class TiledMenu extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Colors.black,
-              Colors.lightBlue,
+              Colors.purple,
+              Colors.blue,
             ],
           ),
         ),
@@ -99,7 +99,7 @@ class TiledMenu extends StatelessWidget {
               left: screenWidth * 0.35,
               child: MenuButton(
                 id: 6,
-                image: 'assets/icon6.PNG',
+                image: 'assets/icon6.jpg',
                 width: screenWidth * 0.3,
                 height: screenHeight * 0.3,
                 text: 'Placeholder',
@@ -110,7 +110,7 @@ class TiledMenu extends StatelessWidget {
               left: screenWidth * 0.675,
               child: MenuButton(
                 id: 7,
-                image: 'assets/icon7.png',
+                image: 'assets/icon7.jpg',
                 width: screenWidth * 0.3,
                 height: screenHeight * 0.2,
                 text: 'Placeholder',
@@ -159,7 +159,7 @@ class MenuButton extends StatelessWidget {
                 width: width,
                 height: height,
                 child: Image.asset(
-                  color: const Color.fromARGB(179, 255, 255, 255),
+                  color: Color.fromARGB(230, 255, 255, 255),
                   colorBlendMode: BlendMode.modulate,
                   image,
                   fit: BoxFit.cover,
@@ -172,7 +172,7 @@ class MenuButton extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                      color: Color.fromARGB(255, 255, 255, 255),
                     ),
                     text: text,
                   ),

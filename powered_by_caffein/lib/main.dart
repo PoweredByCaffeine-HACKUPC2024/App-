@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:powered_by_caffein/Views/TestView.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,9 +25,7 @@ class TiledMenu extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: AppBar(
-
-      ),
+      appBar: AppBar(),
       body: Stack(
         children: <Widget>[
           Positioned(
@@ -34,7 +33,10 @@ class TiledMenu extends StatelessWidget {
             left: screenWidth * 0.35,
             child: MenuButton(
               image: 'assets/icon1.jpg',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const HelpScreen()));
+              },
               width: screenWidth * 0.3,
               height: screenHeight * 0.3,
             ),
@@ -59,7 +61,7 @@ class TiledMenu extends StatelessWidget {
               height: screenHeight * 0.15,
             ),
           ),
-           Positioned(
+          Positioned(
             top: screenHeight * 0.075,
             left: screenWidth * 0.675,
             child: MenuButton(

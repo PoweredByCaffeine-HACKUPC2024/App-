@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class HelpScreen extends StatefulWidget {
@@ -11,40 +12,27 @@ class HelpScreen extends StatefulWidget {
 }
 
 class _HelpScreenState extends State<HelpScreen> {
-  late final WebViewController _controller;
-
   WebViewController controller = WebViewController()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
-    ..setBackgroundColor(const Color(0x00000000))
-    ..setNavigationDelegate(
-      NavigationDelegate(
-        onProgress: (int progress) {
-          // Update loading bar.
-        },
-        onPageStarted: (String url) {},
-        onPageFinished: (String url) {},
-        onWebResourceError: (WebResourceError error) {},
-        onNavigationRequest: (NavigationRequest request) {
-          return NavigationDecision.navigate;
-        },
-      ),
-    )
+    //..loadHtmlString('<h1>Hello World!<h1>');
     ..loadHtmlString(
-        '<iframe src="https://ignasidejose.grafana.net/d-solo/bdkpa3eaqkj5sb/batet-dashboard?orgId=1&from=1714814145595&to=1714835745595&panelId=1" width="450" height="200" frameborder="0"></iframe>');
+      '<iframe src="https://ignasidejose.grafana.net/d-solo/bdkpa3eaqkj5sb/batet-dashboard?orgId=1&from=1714824640785&to=1714846240786&panelId=1" width="1450" height="900" frameborder="0"></iframe>');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Flutter Simple Example')),
-      body: Column(
+      body: WebViewWidget(controller: controller), /*Column(
         children: [
-          // Add widgets above the WebView
-          Expanded(
+          Text('id: ${widget.id}'),
+          SizedBox(
+            height: 300,
+            width: 300,
             child: WebViewWidget(controller: controller),
           ),
           // Add widgets below the WebView
         ],
-      ),
+      ),*/
     );
   }
 }

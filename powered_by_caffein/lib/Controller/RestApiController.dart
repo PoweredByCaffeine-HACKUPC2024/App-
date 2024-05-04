@@ -18,7 +18,7 @@ class RestApiController implements IRestApiController {
   }
   
   @override
-  Future<Response> sendPostRequest(String baseUrl, String path, Map<String, String>? queryParameters, Map<String, String> headers, Map<String, dynamic> body) async {
+  Future<Response> sendPostRequest(String path, Map<String, String>? queryParameters, Map<String, String> headers, Map<String, dynamic> body) async {
     Response response = await dio.post(path, queryParameters: queryParameters, options: Options(headers: headers), data: body);
     return response;
   }

@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:powered_by_caffein/Views/TestView.dart';
-
-void main() {
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final database = openDatabase(
+  // Set the path to the database. Note: Using the `join` function from the
+  // `path` package is best practice to ensure the path is correctly
+  // constructed for each platform.
+  join(await getDatabasesPath(), 'WorkSpaces.db'),
+);
   runApp(MyApp());
 }
 
@@ -32,11 +40,8 @@ class TiledMenu extends StatelessWidget {
             top: screenHeight * 0.025,
             left: screenWidth * 0.35,
             child: MenuButton(
+              id: 1,
               image: 'assets/icon1.jpg',
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const HelpScreen()));
-              },
               width: screenWidth * 0.3,
               height: screenHeight * 0.3,
             ),
@@ -45,8 +50,8 @@ class TiledMenu extends StatelessWidget {
             top: screenHeight * 0.125,
             left: screenWidth * 0.025,
             child: MenuButton(
+              id: 2,
               image: 'assets/icon2.jpg',
-              onPressed: () {},
               width: screenWidth * 0.3,
               height: screenHeight * 0.3,
             ),
@@ -55,48 +60,48 @@ class TiledMenu extends StatelessWidget {
             top: screenHeight * 0.35,
             left: screenWidth * 0.35,
             child: MenuButton(
+              id: 3,
               image: 'assets/icon3.jpg',
-              onPressed: () {},
               width: screenWidth * 0.625,
-              height: screenHeight * 0.15,
+              height: screenHeight * 0.175,
             ),
           ),
           Positioned(
-            top: screenHeight * 0.075,
+            top: screenHeight * 0.125,
             left: screenWidth * 0.675,
             child: MenuButton(
+              id: 4,
               image: 'assets/icon4.jpg',
-              onPressed: () {},
               width: screenWidth * 0.3,
-              height: screenHeight * 0.25,
+              height: screenHeight * 0.2,
             ),
           ),
           Positioned(
             top: screenHeight * 0.45,
             left: screenWidth * 0.025,
             child: MenuButton(
+              id: 5,
               image: 'assets/icon5.jpg',
-              onPressed: () {},
               width: screenWidth * 0.3,
               height: screenHeight * 0.3,
             ),
           ),
           Positioned(
-            top: screenHeight * 0.525,
+            top: screenHeight * 0.55,
             left: screenWidth * 0.35,
             child: MenuButton(
+              id: 6,
               image: 'assets/icon6.PNG',
-              onPressed: () {},
               width: screenWidth * 0.3,
               height: screenHeight * 0.3,
             ),
           ),
           Positioned(
-            top: screenHeight * 0.525,
+            top: screenHeight * 0.55,
             left: screenWidth * 0.675,
             child: MenuButton(
+              id: 7,
               image: 'assets/icon7.png',
-              onPressed: () {},
               width: screenWidth * 0.3,
               height: screenHeight * 0.2,
             ),
@@ -108,14 +113,14 @@ class TiledMenu extends StatelessWidget {
 }
 
 class MenuButton extends StatelessWidget {
+  final int id;
   final String image;
-  final Function() onPressed;
   final double width;
   final double height;
 
   MenuButton({
+    required this.id,
     required this.image,
-    required this.onPressed,
     required this.width,
     required this.height,
   });
@@ -123,7 +128,10 @@ class MenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onPressed,
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => HelpScreen(id: id)));
+      },
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
@@ -135,6 +143,8 @@ class MenuButton extends StatelessWidget {
             width: width,
             height: height,
             child: Image.asset(
+              color: Color.fromARGB(179, 255, 255, 255),
+              colorBlendMode: BlendMode.modulate,
               image,
               fit: BoxFit.cover,
             ),

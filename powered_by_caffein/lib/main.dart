@@ -90,7 +90,7 @@ class _TiledMenuState extends State<TiledMenu> {
     bool alarm7 = false;
     final List<String> graphs = [
       '<iframe src="https://ignasidejose.grafana.net/d-solo/bdkpa3eaqkj5sb/hackupc2024-dashboard?orgId=1&from=1714861143263&to=1714882743263&theme=light&panelId=1" width="$graphWidth" height="$graphHeight" frameborder="0"></iframe>',
-      '<iframe src="https://ignasidejose.grafana.net/d-solo/bdkpa3eaqkj5sb/hackupc2024-dashboard?orgId=1&from=1714861058217&to=1714882658217&theme=light&panelId=2" width="$graphWidth" height="$graphHeight" frameborder="0"></iframe>',
+      '<iframe src="https://ignasidejose.grafana.net/d-solo/bdkpa3eaqkj5sb/hackupc2024-dashboard?orgId=1&from=1714881762265&to=1714883562266&theme=light&panelId=2" width="$graphWidth" height="$graphHeight" frameborder="0"></iframe>',
       '<iframe src="https://ignasidejose.grafana.net/d-solo/bdkpa3eaqkj5sb/batet-dashboard?orgId=1&from=1714838660207&to=1714860260208&theme=light&panelId=1" width="$graphWidth" height="$graphHeight" frameborder="0"></iframe>',
       '<iframe src="https://ignasidejose.grafana.net/d-solo/bdkpa3eaqkj5sb/batet-dashboard?orgId=1&from=1714838660207&to=1714860260208&theme=light&panelId=1" width="$graphWidth" height="$graphHeight" frameborder="0"></iframe>',
       '<iframe src="https://ignasidejose.grafana.net/d-solo/bdkpa3eaqkj5sb/batet-dashboard?orgId=1&from=1714838660207&to=1714860260208&theme=light&panelId=1" width="$graphWidth" height="$graphHeight" frameborder="0"></iframe>',

@@ -148,7 +148,7 @@ class MenuButton extends StatelessWidget {
                 width: width,
                 height: height,
                 child: Image.asset(
-                  color: const Color.fromARGB(230, 255, 255, 255),
+                  color: Color.fromARGB(179, 255, 255, 255),
                   colorBlendMode: BlendMode.modulate,
                   image,
                   fit: BoxFit.cover,
@@ -161,7 +161,7 @@ class MenuButton extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 255, 255, 255),
+                      color: Color.fromARGB(228, 255, 255, 255),
                     ),
                     text: text,
                   ),

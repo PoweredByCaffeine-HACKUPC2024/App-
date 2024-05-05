@@ -148,7 +148,7 @@ class MenuButton extends StatelessWidget {
                 width: width,
                 height: height,
                 child: Image.asset(
-                  color: Color.fromARGB(179, 255, 255, 255),
+                  color: const Color.fromARGB(179, 255, 255, 255),
                   colorBlendMode: BlendMode.modulate,
                   image,
                   fit: BoxFit.cover,

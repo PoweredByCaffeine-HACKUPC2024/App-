@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -20,9 +22,10 @@ class _SoundGraphState extends State<SoundGraph> {
   //..loadHtmlString('<h1>Hello World!<h1>');
 
   double valueToHz() {
-    double Hz = ((_value) * 1000)+1500;
-    return Hz-Hz%1;
+    double Hz = ((_value) * 1000) + 1500;
+    return Hz - Hz % 1;
   }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -56,7 +59,7 @@ class _SoundGraphState extends State<SoundGraph> {
           const SizedBox(height: 40),
           Slider(value: _value, onChanged: _onChanged),
           const SizedBox(height: 40),
-          Text(valueToHz().toString()),
+          //Text(valueToHz().toString()),
           const SizedBox(height: 40),
         ],
       ),
@@ -97,9 +100,18 @@ class _SoundGraphState extends State<SoundGraph> {
     }
   }
 
-  void _onChanged(double value) {
-    setState(() {
-      _value = value;
-    });
+  Future<void> _onChanged(double value) async {
+    _value = value;
+    _value = valueToHz(value);
+    print(_value);
+
+    String url = 'http://10.4.246.167/BuzzerAct/set-frequency';
+
+    Map<String, dynamic> data = {"frequency": _value};
+
+    var response = await http.post(Uri.parse(url),
+        headers: {"Content-Type": "application/json"}, body: jsonEncode(data));
+    print(response.body);
+    setState(() {});
   }
 }

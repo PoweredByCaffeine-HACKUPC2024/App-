@@ -1,4 +1,7 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:powered_by_caffein/Views/SoundGraph.dart';
 import 'package:powered_by_caffein/Views/TestView.dart';
 
 void main() async {
@@ -20,7 +23,58 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class TiledMenu extends StatelessWidget {
+class TiledMenu extends StatefulWidget {
+  const TiledMenu({super.key});
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _TiledMenuState createState() => _TiledMenuState();
+}
+
+class _TiledMenuState extends State<TiledMenu> {
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    // Start polling immediately when the widget is initialized
+    _startPolling();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  void _startPolling() {
+    const tenSeconds = Duration(seconds: 10);
+    _timer = Timer.periodic(tenSeconds, (_) {
+      // Call the API here
+      _fetchData();
+    });
+  }
+
+  void _fetchData() async {
+    try {
+      // Make a GET request to the API
+      final response = await http.get(Uri.parse('https://alertsapi.fly.dev/get-all-alerts'));
+
+      // Handle the response accordingly
+      if (response.statusCode == 200) {
+        // If the request is successful, you can update your UI or perform any other action
+        // Here you might parse the response and update your UI based on the data received
+        print('Data received: ${response.body}');
+      } else {
+        // If the request fails, you can handle the error here
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Handle any errors that occurred during the process
+      print('Error fetching data: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -55,9 +109,10 @@ class TiledMenu extends StatelessWidget {
               image: 'assets/icon1.jpg',
               width: screenWidth * 0.3,
               height: screenHeight * 0.3,
-              text: 'Heat',
+              text: 'Fire',
               alarm: alarm1,
               graph: graphs[0],
+              redirect: 'test',
             ),
           ),
           Positioned(
@@ -68,9 +123,10 @@ class TiledMenu extends StatelessWidget {
               image: 'assets/icon2.jpg',
               width: screenWidth * 0.3,
               height: screenHeight * 0.3,
-              text: 'Humidity',
+              text: 'Sound',
               alarm: alarm2,
               graph: graphs[1],
+              redirect: 'sound',
             ),
           ),
           Positioned(
@@ -81,9 +137,10 @@ class TiledMenu extends StatelessWidget {
               image: 'assets/icon3.jpg',
               width: screenWidth * 0.625,
               height: screenHeight * 0.175,
-              text: 'Noise',
+              text: 'Placeholder',
               alarm: alarm3,
               graph: graphs[2],
+              redirect: 'test',
             ),
           ),
           Positioned(
@@ -97,6 +154,7 @@ class TiledMenu extends StatelessWidget {
               text: 'Placeholder',
               alarm: alarm4,
               graph: graphs[3],
+              redirect: 'test',
             ),
           ),
           Positioned(
@@ -110,6 +168,7 @@ class TiledMenu extends StatelessWidget {
               text: 'Placeholder',
               alarm: alarm5,
               graph: graphs[4],
+              redirect: 'test',
             ),
           ),
           Positioned(
@@ -123,6 +182,7 @@ class TiledMenu extends StatelessWidget {
               text: 'Placeholder',
               alarm: alarm6,
               graph: graphs[5],
+              redirect: 'test',
             ),
           ),
           Positioned(
@@ -136,6 +196,7 @@ class TiledMenu extends StatelessWidget {
               text: 'Placeholder',
               alarm: alarm7,
               graph: graphs[6],
+              redirect: 'test',
             ),
           ),
         ],
@@ -152,6 +213,7 @@ class MenuButton extends StatelessWidget {
   final String text;
   final bool alarm;
   final String graph;
+  final String redirect;
 
   MenuButton({
     required this.id,
@@ -161,6 +223,7 @@ class MenuButton extends StatelessWidget {
     required this.text,
     required this.alarm,
     required this.graph,
+    required this.redirect,
   });
 
   @override
@@ -170,7 +233,7 @@ class MenuButton extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => HelpScreen(graph: graph, id: id)));
+                builder: (context) => redirect=='test'? HelpScreen(graph: graph, id: id):SoundGraph(graph: graph, id: id)));
       },
       child: Card(
         shape: RoundedRectangleBorder(

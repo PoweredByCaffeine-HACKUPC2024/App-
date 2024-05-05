@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:http/http.dart' as http;
 
 class HelpScreen extends StatefulWidget {
   final String graph;
@@ -122,11 +123,37 @@ class _HelpScreenState extends State<HelpScreen> {
     ));
   }
 
-  void _onPressed1() {
-    print('Button 1 pressed');
+  Future<void> _onPressed1() async {
+    String url = 'http://10.4.246.167/builtinLed/on';
+  
+  try {
+    var response = await http.get(Uri.parse(url));
+    
+    if (response.statusCode == 200) {
+      print('Request successful');
+      // You can handle the response here if needed
+    } else {
+      print('Request failed with status: ${response.statusCode}');
+    }
+  } catch (e) {
+    print('Error making GET request: $e');
+  }
   }
 
-  void _onPressed2() {
-    print('Button 2 pressed');
+  Future<void> _onPressed2() async {
+    String url = 'http://10.4.246.167/builtinLed/off';
+  
+  try {
+    var response = await http.get(Uri.parse(url));
+    
+    if (response.statusCode == 200) {
+      print('Request successful');
+      // You can handle the response here if needed
+    } else {
+      print('Request failed with status: ${response.statusCode}');
+    }
+  } catch (e) {
+    print('Error making GET request: $e');
+  }
   }
 }

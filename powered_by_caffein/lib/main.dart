@@ -34,6 +34,17 @@ class TiledMenu extends StatefulWidget {
 class _TiledMenuState extends State<TiledMenu> {
   Timer? _timer;
 
+  final List<bool> alarms = [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+    ];
+
   @override
   void initState() {
     super.initState();
@@ -58,13 +69,13 @@ class _TiledMenuState extends State<TiledMenu> {
   void _fetchData() async {
     try {
       // Make a GET request to the API
-      final response = await http.get(Uri.parse('https://alertsapi.fly.dev/get-all-alerts'));
+      final response =
+          await http.get(Uri.parse('https://alertsapi.fly.dev/get-all-alerts'));
 
       // Handle the response accordingly
       if (response.statusCode == 200) {
         // If the request is successful, you can update your UI or perform any other action
         // Here you might parse the response and update your UI based on the data received
-        print('Data received: ${response.body}');
       } else {
         // If the request fails, you can handle the error here
         print('Request failed with status: ${response.statusCode}');
@@ -75,19 +86,14 @@ class _TiledMenuState extends State<TiledMenu> {
     }
   }
 
+  stopAlarmId(int id) {}
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     double graphWidth = screenWidth * 2.45;
     double graphHeight = screenHeight * 1.08;
-    bool alarm1 = false;
-    bool alarm2 = false;
-    bool alarm3 = true;
-    bool alarm4 = false;
-    bool alarm5 = false;
-    bool alarm6 = false;
-    bool alarm7 = false;
+    
     final List<String> graphs = [
       '<iframe src="https://ignasidejose.grafana.net/d-solo/bdkpa3eaqkj5sb/hackupc2024-dashboard?orgId=1&from=1714861143263&to=1714882743263&theme=light&panelId=1" width="$graphWidth" height="$graphHeight" frameborder="0"></iframe>',
       '<iframe src="https://ignasidejose.grafana.net/d-solo/bdkpa3eaqkj5sb/hackupc2024-dashboard?orgId=1&from=1714881762265&to=1714883562266&theme=light&panelId=2" width="$graphWidth" height="$graphHeight" frameborder="0"></iframe>',
@@ -110,7 +116,7 @@ class _TiledMenuState extends State<TiledMenu> {
               width: screenWidth * 0.3,
               height: screenHeight * 0.3,
               text: 'Fire',
-              alarm: alarm1,
+              alarm: alarms[0],
               graph: graphs[0],
               redirect: 'test',
             ),
@@ -124,7 +130,7 @@ class _TiledMenuState extends State<TiledMenu> {
               width: screenWidth * 0.3,
               height: screenHeight * 0.3,
               text: 'Sound',
-              alarm: alarm2,
+              alarm: alarms[1],
               graph: graphs[1],
               redirect: 'sound',
             ),
@@ -138,7 +144,7 @@ class _TiledMenuState extends State<TiledMenu> {
               width: screenWidth * 0.625,
               height: screenHeight * 0.175,
               text: 'Placeholder',
-              alarm: alarm3,
+              alarm: alarms[2],
               graph: graphs[2],
               redirect: 'test',
             ),
@@ -152,7 +158,7 @@ class _TiledMenuState extends State<TiledMenu> {
               width: screenWidth * 0.3,
               height: screenHeight * 0.2,
               text: 'Placeholder',
-              alarm: alarm4,
+              alarm: alarms[3],
               graph: graphs[3],
               redirect: 'test',
             ),
@@ -166,7 +172,7 @@ class _TiledMenuState extends State<TiledMenu> {
               width: screenWidth * 0.3,
               height: screenHeight * 0.3,
               text: 'Placeholder',
-              alarm: alarm5,
+              alarm: alarms[4],
               graph: graphs[4],
               redirect: 'test',
             ),
@@ -180,7 +186,7 @@ class _TiledMenuState extends State<TiledMenu> {
               width: screenWidth * 0.3,
               height: screenHeight * 0.3,
               text: 'Placeholder',
-              alarm: alarm6,
+              alarm: alarms[5],
               graph: graphs[5],
               redirect: 'test',
             ),
@@ -194,7 +200,7 @@ class _TiledMenuState extends State<TiledMenu> {
               width: screenWidth * 0.3,
               height: screenHeight * 0.2,
               text: 'Placeholder',
-              alarm: alarm7,
+              alarm: alarms[6],
               graph: graphs[6],
               redirect: 'test',
             ),
@@ -233,7 +239,9 @@ class MenuButton extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => redirect=='test'? HelpScreen(graph: graph, id: id):SoundGraph(graph: graph, id: id)));
+                builder: (context) => redirect == 'test'
+                    ? HelpScreen(graph: graph, id: id)
+                    : SoundGraph(graph: graph, id: id)));
       },
       child: Card(
         shape: RoundedRectangleBorder(

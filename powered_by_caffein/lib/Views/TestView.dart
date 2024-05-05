@@ -42,16 +42,19 @@ class _HelpScreenState extends State<HelpScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          const SizedBox(height: 40),
           Text('id: ${widget.id}'),
+          const SizedBox(height: 40),
           Center(
             child: SizedBox(
                 width: screenWidth * 0.9,
                 height: screenHeight * 0.4,
                 child: WebViewWidget(controller: controller)),
           ),
+          const SizedBox(height: 40),
           Row(
             children: [
-              const SizedBox(height: 4),
+              const SizedBox(width: 40),
               const Flexible(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,9 +79,44 @@ class _HelpScreenState extends State<HelpScreen> {
                   ],
                 ),
               ),
+              const SizedBox(width: 10),
               FloatingActionButton(
-                  onPressed: _onPressed1, child: Icon(Icons.add)),
-              SizedBox(height: 4),
+                  onPressed: _onPressed1, child: const Icon(Icons.arrow_forward)),
+              const SizedBox(width: 40),
+            ],
+          ),
+          const SizedBox(height: 40),
+          Row(
+            children: [
+              const SizedBox(width: 40),
+              const Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      softWrap: true,
+                      'Do Something Else',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      'Explanation of what doing something else actually does, like it may actually be kinda long so let me just write a bit to test it',
+                      style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.normal),
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 10),
+              FloatingActionButton(
+                  onPressed: _onPressed2, child: const Icon(Icons.arrow_forward)),
+              const SizedBox(width: 40),
             ],
           ),
         ],
@@ -86,8 +124,11 @@ class _HelpScreenState extends State<HelpScreen> {
     ));
   }
 
-  String _onPressed1() {
+  void _onPressed1() {
     print('Button 1 pressed');
-    return 'a';
+  }
+
+  void _onPressed2() {
+    print('Button 2 pressed');
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:powered_by_caffein/Views/TestView.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
@@ -24,6 +25,13 @@ class TiledMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    bool alarm1 = false;
+    bool alarm2 = false;
+    bool alarm3 = true;
+    bool alarm4 = false;
+    bool alarm5 = false;
+    bool alarm6 = false;
+    bool alarm7 = false;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -38,6 +46,7 @@ class TiledMenu extends StatelessWidget {
               width: screenWidth * 0.3,
               height: screenHeight * 0.3,
               text: 'Heat',
+              alarm: alarm1,
             ),
           ),
           Positioned(
@@ -49,6 +58,7 @@ class TiledMenu extends StatelessWidget {
               width: screenWidth * 0.3,
               height: screenHeight * 0.3,
               text: 'Humidity',
+              alarm: alarm2,
             ),
           ),
           Positioned(
@@ -60,6 +70,7 @@ class TiledMenu extends StatelessWidget {
               width: screenWidth * 0.625,
               height: screenHeight * 0.175,
               text: 'Noise',
+              alarm: alarm3,
             ),
           ),
           Positioned(
@@ -71,6 +82,7 @@ class TiledMenu extends StatelessWidget {
               width: screenWidth * 0.3,
               height: screenHeight * 0.2,
               text: 'Placeholder',
+              alarm: alarm4,
             ),
           ),
           Positioned(
@@ -82,6 +94,7 @@ class TiledMenu extends StatelessWidget {
               width: screenWidth * 0.3,
               height: screenHeight * 0.3,
               text: 'Placeholder',
+              alarm: alarm5,
             ),
           ),
           Positioned(
@@ -93,6 +106,7 @@ class TiledMenu extends StatelessWidget {
               width: screenWidth * 0.3,
               height: screenHeight * 0.3,
               text: 'Placeholder',
+              alarm: alarm6,
             ),
           ),
           Positioned(
@@ -104,6 +118,7 @@ class TiledMenu extends StatelessWidget {
               width: screenWidth * 0.3,
               height: screenHeight * 0.2,
               text: 'Placeholder',
+              alarm: alarm7,
             ),
           ),
         ],
@@ -118,6 +133,7 @@ class MenuButton extends StatelessWidget {
   final double width;
   final double height;
   final String text;
+  final bool alarm;
 
   MenuButton({
     required this.id,
@@ -125,6 +141,7 @@ class MenuButton extends StatelessWidget {
     required this.width,
     required this.height,
     required this.text,
+    required this.alarm,
   });
 
   @override
@@ -139,7 +156,7 @@ class MenuButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(15.0),
         ),
         elevation: 5,
-        child: ClipRRect( 
+        child: ClipRRect(
           borderRadius: BorderRadius.circular(15.0),
           child: Stack(
             alignment: Alignment.center,
@@ -148,7 +165,7 @@ class MenuButton extends StatelessWidget {
                 width: width,
                 height: height,
                 child: Image.asset(
-                  color: const Color.fromARGB(179, 255, 255, 255),
+                  color: alarm? Color.fromARGB(253, 155, 5, 5): Color.fromARGB(220, 255, 255, 255),
                   colorBlendMode: BlendMode.modulate,
                   image,
                   fit: BoxFit.cover,
@@ -158,21 +175,20 @@ class MenuButton extends StatelessWidget {
                 child: RichText(
                   overflow: TextOverflow.ellipsis,
                   text: TextSpan(
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(228, 255, 255, 255),
+                      color: alarm? Color.fromARGB(255, 95, 1, 1) : Color.fromARGB(255, 255, 255, 255),
                     ),
                     text: text,
                   ),
-                    textAlign: TextAlign.center,
-                    
-                  ),
+                  textAlign: TextAlign.center,
                 ),
+              ),
             ],
           ),
         ),
       ),
-    );  
+    );
   }
 }
